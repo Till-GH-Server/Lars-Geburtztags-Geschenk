@@ -156,6 +156,14 @@ h2{font-family:'Bungee',Impact,sans-serif;font-weight:400;font-size:clamp(1.8rem
 .loot .discord-group{border-color:#7289ff88;background:linear-gradient(135deg,#5865f222,#5865f208)}
 .loot .discord-group h3{color:#aebaff;text-shadow:0 0 16px #5865f288}
 .loot .discord-group li::before{background:#7289ff;box-shadow:0 0 9px #7289ff88}
+.loot .banner-gift{padding-top:10px}
+.loot .banner-gift::before{display:none}
+.loot .banner-gift .banner-title{display:block;margin-bottom:9px;color:#dbe0ff;font-weight:700}
+.loot .banner-download{display:block;overflow:hidden;border:2px solid #7289ff;border-radius:12px;background:#10152f;color:#fff;text-decoration:none;box-shadow:0 0 18px #5865f244;transition:transform .2s,box-shadow .2s}
+.loot .banner-download:hover{transform:translateY(-2px);box-shadow:0 0 28px #7289ff88}
+.loot .banner-download img{display:block;width:100%;height:auto;aspect-ratio:414/229;object-fit:cover}
+.loot .banner-download span{display:block;padding:10px 12px;text-align:center;font-family:'Bungee',Impact,sans-serif;font-size:.82rem;letter-spacing:.03em;color:#cbd2ff}
+.loot .banner-download:focus-visible{outline:4px solid var(--gd);outline-offset:4px}
 @media (prefers-reduced-motion:reduce){.slide.on,.badge,.go .badge,.go .line.name,.start,#intro::before,.more{animation:none!important}.go .badge{transform:rotate(-4deg) scale(1)}.more{opacity:.9}.go .ch{animation-duration:.01s;animation-delay:0s}}
 </style>
 </head>
@@ -388,7 +396,7 @@ function addGiftGroup(title,items,extraClass){
   group.className='gift-group'+(extraClass?' '+extraClass:'');
   heading.textContent=title;
   items.forEach(function(item){var li=document.createElement('li');li.textContent=item;list.appendChild(li)});
-  group.appendChild(heading);group.appendChild(list);$('#dl').appendChild(group);
+  group.appendChild(heading);group.appendChild(list);$('#dl').appendChild(group);return group;
 }
 addGiftGroup('Counter-Strike',[
   '4x Aufkleber | FURIA (Glitzer) | Paris 2023',
@@ -399,7 +407,18 @@ addGiftGroup('Counter-Strike',[
   '1x M4A4 | Äolische Dunkelheit',
   '1x SG 553 | Drachentechnologie'
 ]);
-addGiftGroup('Discord',['Discord Nitro'],'discord-group');
+var discordGiftGroup=addGiftGroup('Discord',['Discord Nitro'],'discord-group');
+var bannerItem=document.createElement('li');bannerItem.className='banner-gift';
+var bannerTitle=document.createElement('span');bannerTitle.className='banner-title';bannerTitle.textContent='Eigener animierter Banner';
+var bannerLink=document.createElement('a');bannerLink.className='banner-download';
+bannerLink.href='assets/dramalama-animated-banner.gif';
+bannerLink.download='Lars-Eigener-Animierter-Discord-Banner.gif';
+bannerLink.setAttribute('aria-label','Animierten Discord-Banner herunterladen');
+var bannerImage=document.createElement('img');bannerImage.src=bannerLink.href;bannerImage.alt='Animierter DramaLama-Discord-Banner';bannerImage.loading='lazy';
+var bannerCaption=document.createElement('span');bannerCaption.textContent='Banner herunterladen';
+bannerLink.appendChild(bannerImage);bannerLink.appendChild(bannerCaption);
+bannerItem.appendChild(bannerTitle);bannerItem.appendChild(bannerLink);
+discordGiftGroup.querySelector('ul').appendChild(bannerItem);
 var dc=[],draf=null;
 function dropLoot(x,y){
   ITEMS.forEach(function(it,i){setTimeout(function(){
