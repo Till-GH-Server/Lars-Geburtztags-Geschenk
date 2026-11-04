@@ -156,17 +156,16 @@ h2{font-family:'Bungee',Impact,sans-serif;font-weight:400;font-size:clamp(1.8rem
 .loot .discord-group{border-color:#7289ff88;background:linear-gradient(135deg,#5865f222,#5865f208)}
 .loot .discord-group h3{color:#aebaff;text-shadow:0 0 16px #5865f288}
 .loot .discord-group li::before{background:#7289ff;box-shadow:0 0 9px #7289ff88}
-.loot .gift-group ul li.banner-gift{display:block;list-style:none;margin:14px 0 0;padding:0;background:transparent}
-.loot .gift-group ul li.banner-gift::before{content:none!important;display:none!important}
-.loot .banner-title{display:block;margin:0 0 10px;color:#dbe0ff;font-weight:700;line-height:1.2}
-.loot .banner-download{display:block;position:relative;width:100%;overflow:hidden;border:2px solid #7289ff;border-radius:12px;background:#10152f;color:#fff;text-decoration:none;box-shadow:0 0 18px #5865f244;transition:transform .2s,box-shadow .2s}
-.loot .banner-download:hover{transform:translateY(-2px);box-shadow:0 0 28px #7289ff88}
-.loot .banner-preview{display:block;position:relative;width:100%;aspect-ratio:414/229;overflow:hidden;background:linear-gradient(135deg,#14103a,#090d24)}
-.loot .banner-preview img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none;object-fit:cover}
-.loot .banner-preview.image-missing::after{content:"Banner-Datei fehlt noch";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;color:#cbd2ff;font-size:1rem;text-align:center}
-.loot .banner-preview.image-missing img{display:none}
-.loot .banner-download .banner-caption{display:block;padding:10px 12px;text-align:center;font-family:'Bungee',Impact,sans-serif;font-size:.82rem;letter-spacing:.03em;color:#cbd2ff}
-.loot .banner-download:focus-visible{outline:4px solid var(--gd);outline-offset:4px}
+/* Discord banner gift: keep it aligned and remove the list bullet */
+.loot .discord-group .gift-list .banner-gift{display:block;padding:10px 0 0;margin:0;list-style:none}
+.loot .discord-group .gift-list .banner-gift::before{content:none!important;display:none!important}
+.loot .discord-group .banner-title{display:block;margin:0 0 10px;color:#dbe0ff;font-weight:700}
+.loot .discord-group .banner-download{display:block;width:100%;max-width:100%;overflow:hidden;box-sizing:border-box;border:2px solid #7289ff;border-radius:12px;background:#10152f;color:#fff;text-decoration:none;box-shadow:0 0 18px #5865f244;transition:transform .2s,box-shadow .2s}
+.loot .discord-group .banner-download:hover{transform:translateY(-2px);box-shadow:0 0 28px #7289ff88}
+.loot .discord-group .banner-download img{display:block;width:100%;height:auto;max-height:none;aspect-ratio:414/229;object-fit:cover;object-position:center;margin:0;padding:0}
+.loot .discord-group .banner-download .banner-caption{display:block;padding:10px 12px;text-align:center;font-family:'Bungee',Impact,sans-serif;font-size:.82rem;letter-spacing:.03em;color:#cbd2ff}
+.loot .discord-group .banner-download:focus-visible{outline:4px solid var(--gd);outline-offset:4px}
+.loot .discord-group .banner-image-missing{display:block;padding:14px;text-align:center;color:#ffcf70;font-size:1rem;line-height:1.3;background:#10152f}
 @media (prefers-reduced-motion:reduce){.slide.on,.badge,.go .badge,.go .line.name,.start,#intro::before,.more{animation:none!important}.go .badge{transform:rotate(-4deg) scale(1)}.more{opacity:.9}.go .ch{animation-duration:.01s;animation-delay:0s}}
 </style>
 </head>
@@ -417,11 +416,10 @@ var bannerLink=document.createElement('a');bannerLink.className='banner-download
 bannerLink.href='assets/dramalama-animated-banner.gif';
 bannerLink.download='Lars-Eigener-Animierter-Discord-Banner.gif';
 bannerLink.setAttribute('aria-label','Animierten Discord-Banner herunterladen');
-var bannerPreview=document.createElement('span');bannerPreview.className='banner-preview';
 var bannerImage=document.createElement('img');bannerImage.src=bannerLink.href;bannerImage.alt='Animierter DramaLama-Discord-Banner';bannerImage.loading='lazy';
-bannerImage.onerror=function(){bannerPreview.classList.add('image-missing');};
+bannerImage.onerror=function(){bannerImage.remove();var missing=document.createElement('span');missing.className='banner-image-missing';missing.textContent='Bannerdatei nicht gefunden. Bitte die GIF-Datei als assets/dramalama-animated-banner.gif hochladen.';bannerLink.insertBefore(missing,bannerCaption);};
 var bannerCaption=document.createElement('span');bannerCaption.className='banner-caption';bannerCaption.textContent='Banner herunterladen';
-bannerPreview.appendChild(bannerImage);bannerLink.appendChild(bannerPreview);bannerLink.appendChild(bannerCaption);
+bannerLink.appendChild(bannerImage);bannerLink.appendChild(bannerCaption);
 bannerItem.appendChild(bannerTitle);bannerItem.appendChild(bannerLink);
 discordGiftGroup.querySelector('ul').appendChild(bannerItem);
 var dc=[],draf=null;
