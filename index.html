@@ -403,7 +403,7 @@ function addGiftGroup(title,items,extraClass){
 addGiftGroup('Gaming',['CS-SkinPack']);
 addGiftGroup('Musik',['Spotify Lifetime'],'spotify-group');
 addGiftGroup('Sakura Reselling',['Ultimate Abo'],'sakura-group');
-var discordGiftGroup=addGiftGroup('Discord',[],'discord-group');
+var bonusGiftGroup=addGiftGroup('Bonus',[],'discord-group');
 var bannerItem=document.createElement('li');bannerItem.className='banner-gift';
 var bannerTitle=document.createElement('span');bannerTitle.className='banner-title';bannerTitle.textContent='Eigener animierter Banner';
 var bannerLink=document.createElement('a');bannerLink.className='banner-download';
@@ -415,7 +415,7 @@ bannerImage.onerror=function(){bannerImage.remove();var missing=document.createE
 var bannerCaption=document.createElement('span');bannerCaption.className='banner-caption';bannerCaption.textContent='Banner herunterladen';
 bannerLink.appendChild(bannerImage);bannerLink.appendChild(bannerCaption);
 bannerItem.appendChild(bannerTitle);bannerItem.appendChild(bannerLink);
-discordGiftGroup.querySelector('ul').appendChild(bannerItem);
+bonusGiftGroup.querySelector('ul').appendChild(bannerItem);
 var dc=[],draf=null;
 function dropLoot(x,y){
   ITEMS.forEach(function(it,i){setTimeout(function(){
