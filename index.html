@@ -403,19 +403,7 @@ function addGiftGroup(title,items,extraClass){
 addGiftGroup('Gaming',['CS-SkinPack']);
 addGiftGroup('Musik',['Spotify Lifetime'],'spotify-group');
 addGiftGroup('Sakura Reselling',['Ultimate Abo'],'sakura-group');
-var bonusGiftGroup=addGiftGroup('Bonus',[],'discord-group');
-var bannerItem=document.createElement('li');bannerItem.className='banner-gift';
-var bannerTitle=document.createElement('span');bannerTitle.className='banner-title';bannerTitle.textContent='Eigener animierter Banner';
-var bannerLink=document.createElement('a');bannerLink.className='banner-download';
-bannerLink.href='assets/dramalama-animated-banner.gif';
-bannerLink.download='Lars-Eigener-Animierter-Discord-Banner.gif';
-bannerLink.setAttribute('aria-label','Animierten Discord-Banner herunterladen');
-var bannerImage=document.createElement('img');bannerImage.src=bannerLink.href;bannerImage.alt='Animierter DramaLama-Discord-Banner';bannerImage.loading='lazy';
-bannerImage.onerror=function(){bannerImage.remove();var missing=document.createElement('span');missing.className='banner-image-missing';missing.textContent='Bannerdatei nicht gefunden. Bitte die GIF-Datei als assets/dramalama-animated-banner.gif hochladen.';bannerLink.insertBefore(missing,bannerCaption);};
-var bannerCaption=document.createElement('span');bannerCaption.className='banner-caption';bannerCaption.textContent='Banner herunterladen';
-bannerLink.appendChild(bannerImage);bannerLink.appendChild(bannerCaption);
-bannerItem.appendChild(bannerTitle);bannerItem.appendChild(bannerLink);
-bonusGiftGroup.querySelector('ul').appendChild(bannerItem);
+
 var dc=[],draf=null;
 function dropLoot(x,y){
   ITEMS.forEach(function(it,i){setTimeout(function(){
