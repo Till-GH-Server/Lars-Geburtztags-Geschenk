@@ -414,6 +414,7 @@ packBanner.src='images/sakura-ultimate-pack.png';
 packBanner.alt='Sakura Ultimate Pack – Übersicht der enthaltenen Geschenke';
 packBanner.loading='lazy';
 packBanner.decoding='async';
+packBanner.onerror=function(){packBanner.remove();};
 $('#dl').appendChild(packBanner);
 addGiftGroup('Sakura Ultimate Pack',[
   '1x Spotify Lifetime',
